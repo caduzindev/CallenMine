@@ -62,4 +62,21 @@ describe('Test GetCustomer',()=>{
             }
         })
     })
+
+    test('should return 400 if document is not informed',async ()=>{
+        const { sut } = Sut()
+
+        const httpRequest = {
+            params: {
+
+            }
+        }
+
+        const result = await sut.handle(httpRequest)
+
+        expect(result).toEqual({
+            statusCode: 400,
+            data: 'document not informed'
+        })
+    })
 })
