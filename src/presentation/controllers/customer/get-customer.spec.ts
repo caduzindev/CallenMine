@@ -42,4 +42,24 @@ describe('Test GetCustomer',()=>{
             data: {}
         })
     })
+
+    test('should return 200 if customer was found',async ()=>{
+        const { sut } = Sut()
+
+        const httpRequest = {
+            params: {
+                document: '141.577.406-98'
+            }
+        }
+
+        const result = await sut.handle(httpRequest)
+
+        expect(result).toEqual({
+            statusCode: 200,
+            data: {
+                name: 'jose',
+                document: '141.577.406-98'
+            }
+        })
+    })
 })
