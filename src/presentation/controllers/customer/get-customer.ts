@@ -4,7 +4,9 @@ import { HttpRequest, HttpResponse } from "../../protocols/http";
 
 export class GetCustomer implements Controller {
     constructor(private readonly getInfoCustomer: GetInfoCustomer) {}
+
     async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
+        if (!httpRequest.params.document) return { statusCode: 400, data: 'document not informed' }
         const customer = await this.getInfoCustomer.get(httpRequest.params.document)
 
         if (!customer) return {statusCode: 404, data:{}}
