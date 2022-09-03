@@ -1,0 +1,20 @@
+{
+  "name": "callenmine",
+  "version": "1.0.0",
+  "description": "Essa API tem objetivo de ser um serviço de agendamento que possa ser consumido por diversas aplicações.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/caduzindev/CallenMine.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/caduzindev/CallenMine/issues"
+  },
+  "homepage": "https://github.com/caduzindev/CallenMine#readme"
+}
