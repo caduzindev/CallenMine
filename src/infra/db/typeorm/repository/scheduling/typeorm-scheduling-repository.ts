@@ -23,4 +23,26 @@ export class TypeOrmSchedulingRepository implements SchedulingRepository {
 
         return domainSchedulings
     }
+
+    async get(scheduling_id: number): Promise<Scheduling|null> {
+        let domainScheduling: Scheduling | null = null
+        const result: TypeOrmScheduling | null = await AppDataSource.getInstance()
+            .getRepository(TypeOrmScheduling)
+            .findOne({
+                where: {
+                    id: scheduling_id
+                },
+                relations: {
+                    customer: true,
+                    dates: {
+                        experts: true
+                    }
+                }
+            })
+        if (result) {
+            domainScheduling = Mapper.toDomainEntity(result)
+        }
+
+        return domainScheduling
+    }
 }
