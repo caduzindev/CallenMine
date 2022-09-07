@@ -5,17 +5,17 @@ CREATE TABLE customer(
   CONSTRAINT customer_pkey PRIMARY KEY("document")
 );
 
-CREATE UNIQUE INDEX customer_idx ON customer;
+CREATE UNIQUE INDEX customer_idx ON customer("document");
 
 CREATE TABLE expert(
-  id integer NOT NULL,
+  id serial,
   "name" varchar NOT NULL,
   expertises varchar[] NOT NULL,
   CONSTRAINT expert_pkey PRIMARY KEY(id)
 );
 
 CREATE TABLE scheduling_block(
-  id integer NOT NULL,
+  id serial,
   start_date date NOT NULL,
   end_date date NOT NULL,
   note varchar,
@@ -23,14 +23,14 @@ CREATE TABLE scheduling_block(
 );
 
 CREATE TABLE scheduling(
-  id integer NOT NULL,
+  id serial,
   customer_document varchar NOT NULL,
   note varchar,
   CONSTRAINT scheduling_pkey PRIMARY KEY(id)
 );
 
 CREATE TABLE scheduling_date(
-  id integer NOT NULL,
+  id serial,
   scheduling_id integer NOT NULL,
   date date NOT NULL,
   CONSTRAINT scheduling_date_pkey PRIMARY KEY(id)
