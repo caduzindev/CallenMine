@@ -4,6 +4,7 @@ import { TypeOrmScheduling } from "../../entity/typeorm-scheduling";
 export class Mapper {
     public static toDomainEntity(typeOrmScheduling: TypeOrmScheduling): Scheduling {
         const domain: Scheduling = {
+            id: typeOrmScheduling.id,
             customer: typeOrmScheduling.customer,
             note: typeOrmScheduling.note,
             schedules: typeOrmScheduling.dates

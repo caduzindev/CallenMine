@@ -11,6 +11,7 @@ export interface Block {
     note: string
 }
 export interface Scheduling {
+    id: number
     customer: Customer
     note: string
     schedules: Dates[]

@@ -1,6 +1,7 @@
-import { InsertResult } from "typeorm";
+import { In, InsertResult } from "typeorm";
 import { SchedulingRepository } from "../../../../../data/protocols/scheduling-repository";
 import { Scheduling } from "../../../../../domain/entities/scheduling";
+import { TypeOrmExpert } from "../../entity/typeorm-expert";
 import { TypeOrmScheduling } from "../../entity/typeorm-scheduling";
 import { AppDataSource } from "../../helper/app-data-source";
 import { Mapper } from "./mapper";
@@ -61,5 +62,34 @@ export class TypeOrmSchedulingRepository implements SchedulingRepository {
             .returning('id')
             .execute()
         return insertResult.identifiers[0].id
+    }
+
+    async getSchedulingsFromExpert(expert_id: number): Promise<Scheduling[]> {
+        let schedulingDateIds = await AppDataSource.getInstance()
+            .query(`select scheduling_date_id from scheduling_date_expert where expert_id=${expert_id}`)
+
+        schedulingDateIds = schedulingDateIds.map(date=>date.scheduling_date_id)
+
+        const result = await AppDataSource.getInstance()
+            .getRepository(TypeOrmScheduling)
+            .find(
+            {
+                relations: {
+                    customer: true,
+                    dates: {
+                        experts: true
+                    }
+                },
+                where: {
+                    dates: {
+                        id: In(schedulingDateIds)
+                    }
+                }
+            }
+            )
+
+        const domainSchedulings = Mapper.toDomainEntities(result)
+
+        return domainSchedulings
     }
 }

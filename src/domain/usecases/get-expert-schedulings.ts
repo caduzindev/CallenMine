@@ -1,5 +1,5 @@
 import { Scheduling } from "../entities/scheduling";
 
-export interface GetExpertSchedules {
+export interface GetExpertSchedulings {
     getAll(id: string): Promise<Scheduling[]>
 }
