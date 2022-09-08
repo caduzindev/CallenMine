@@ -15,4 +15,13 @@ export class Mapper {
     public static toDomainEntities(typeOrmSchedulings: TypeOrmScheduling[]): Scheduling[] {
         return typeOrmSchedulings.map(typeOrmSchedulings => this.toDomainEntity(typeOrmSchedulings));
     }
+
+    public static toOrmEntity(domain: Scheduling): TypeOrmScheduling {
+        const orm: TypeOrmScheduling = new TypeOrmScheduling()
+
+        orm.customer.document = domain.customer.document
+        orm.note = domain.note
+
+        return orm
+    }
 }

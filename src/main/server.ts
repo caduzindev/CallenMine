@@ -1,11 +1,13 @@
 import 'reflect-metadata'
-import express from 'express'
+import express, { json } from 'express'
 import routes from './config/routes'
 import { AppDataSource } from '../infra/db/typeorm/helper/app-data-source'
 
 const app = express()
+app.use(json())
 
 routes(app)
+
 
 AppDataSource
     .getInstance()
