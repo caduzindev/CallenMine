@@ -1,11 +1,24 @@
 import { Between } from "typeorm";
 import { BlockRepository } from "../../../../../data/protocols/block-repository";
 import { Block } from "../../../../../domain/entities/scheduling";
+import { AddBlockDto } from "../../../../../domain/usecases/add-block";
 import { TypeOrmBlock } from "../../entity/typeorm-block";
 import { AppDataSource } from "../../helper/app-data-source";
 import { Mapper } from "./mapper";
 
 export class TypeOrmBlockRepository implements BlockRepository {
+    async add(block: AddBlockDto): Promise<number> {
+        let blockSave = new TypeOrmBlock()
+        blockSave.start_date = block.start
+        blockSave.end_date = block.end
+        blockSave.note = block.note
+
+        const result = await AppDataSource.getInstance()
+            .getRepository(TypeOrmBlock)
+            .save(blockSave)
+
+        return result.id
+    }
     async getBlocksPerPeriod(period: { start: string,end: string }): Promise<Block[]> {
         const blocks = await AppDataSource.getInstance()
             .getRepository(TypeOrmBlock)

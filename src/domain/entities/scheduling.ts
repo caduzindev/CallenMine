@@ -7,6 +7,7 @@ export interface Dates {
 }
 
 export interface Block {
+    id: number
     start_date: string
     end_date: string
     note: string

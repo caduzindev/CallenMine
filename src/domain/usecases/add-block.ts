@@ -4,5 +4,5 @@ export interface AddBlockDto {
     note: string
 }
 export interface AddBlock {
-    add(data: AddBlockDto): Promise<string>
+    add(data: AddBlockDto): Promise<number>
 }

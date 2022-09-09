@@ -1,9 +1,9 @@
-import { Column, Entity, OneToMany, PrimaryColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { TypeOrmScheduling } from "./typeorm-scheduling";
 
 @Entity("customer")
 export class TypeOrmCustomer {
-    @PrimaryColumn({ primaryKeyConstraintName: 'customer_pkey' })
+    @PrimaryGeneratedColumn({ primaryKeyConstraintName: 'customer_pkey' })
     document: string
 
     @Column()

@@ -1,10 +1,10 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { TypeOrmCustomer } from "./typeorm-customer";
 import { TypeOrmSchedulingDate } from "./typeorm-scheduling-date";
 
 @Entity("scheduling")
 export class TypeOrmScheduling {
-    @PrimaryColumn({ primaryKeyConstraintName: "scheduling_pkey" })
+    @PrimaryGeneratedColumn({ primaryKeyConstraintName: "scheduling_pkey" })
     id: number
 
     @ManyToOne(()=>TypeOrmCustomer,(typeOrmScheduling)=>typeOrmScheduling.schedules)

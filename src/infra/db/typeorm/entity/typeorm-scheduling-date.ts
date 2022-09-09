@@ -1,10 +1,10 @@
-import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryColumn } from "typeorm";
+import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { TypeOrmExpert } from "./typeorm-expert";
 import { TypeOrmScheduling } from "./typeorm-scheduling";
 
 @Entity("scheduling_date")
 export class TypeOrmSchedulingDate {
-    @PrimaryColumn({ primaryKeyConstraintName: "scheduling_date_pkey" })
+    @PrimaryGeneratedColumn({ primaryKeyConstraintName: "scheduling_date_pkey" })
     id: number
 
     @ManyToOne(()=>TypeOrmScheduling,(typeOrmSchedulingDate)=>typeOrmSchedulingDate.dates)

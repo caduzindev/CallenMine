@@ -4,5 +4,5 @@ export interface AddSchedulingDto {
     schedules: Array<{date: string,experts_id: number[]}>
 }
 export interface AddScheduling {
-    add(data: AddSchedulingDto): Promise<string>
+    add(data: AddSchedulingDto): Promise<number>
 }

@@ -6,7 +6,7 @@ import { AppDataSource } from "../../helper/app-data-source";
 import { Mapper } from "./mapper";
 
 export class TypeOrmDatesRepository implements DatesRepository {
-    async add(data: { scheduling_id: number; date: string; }): Promise<string> {
+    async add(data: { scheduling_id: number; date: string; }): Promise<number> {
         const insertResult: InsertResult = await AppDataSource.getInstance()
             .createQueryBuilder()
             .insert()

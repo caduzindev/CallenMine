@@ -1,8 +1,8 @@
-import { Column, Entity, PrimaryColumn } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('scheduling_block')
 export class TypeOrmBlock {
-    @PrimaryColumn({ primaryKeyConstraintName: 'scheduling_block_pkey' })
+    @PrimaryGeneratedColumn({ primaryKeyConstraintName: 'scheduling_block_pkey' })
     id: number
 
     @Column()

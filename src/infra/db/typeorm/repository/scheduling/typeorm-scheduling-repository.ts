@@ -45,7 +45,7 @@ export class TypeOrmSchedulingRepository implements SchedulingRepository {
         return domainScheduling
     }
 
-    async add(data: { customer_document: string; note: string; }): Promise<string> {
+    async add(data: { customer_document: string; note: string; }): Promise<number> {
         const insertResult: InsertResult = await AppDataSource.getInstance()
             .createQueryBuilder()
             .insert()

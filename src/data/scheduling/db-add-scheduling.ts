@@ -9,7 +9,7 @@ export class DbAddScheduling implements AddScheduling {
         private readonly datesRepository: DatesRepository,
         private readonly dateUtil: DateUtil
     ) {}
-    async add(data: AddSchedulingDto): Promise<string> {
+    async add(data: AddSchedulingDto): Promise<number> {
         const initialDate = this.dateUtil.converterToIso(data.schedules[0].date)
 
         if (

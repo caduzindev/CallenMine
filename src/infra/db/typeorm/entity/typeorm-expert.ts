@@ -1,8 +1,8 @@
-import { Column, Entity, ManyToMany, OneToMany, PrimaryColumn } from "typeorm";
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
 import { TypeOrmSchedulingDate } from "./typeorm-scheduling-date";
 @Entity("expert")
 export class TypeOrmExpert {
-    @PrimaryColumn({ primaryKeyConstraintName: 'expert_pkey' })
+    @PrimaryGeneratedColumn({ primaryKeyConstraintName: 'expert_pkey' })
     id: number
 
     @Column()
