@@ -1,7 +1,9 @@
-import { InsertResult } from "typeorm";
+import { Between, InsertResult } from "typeorm";
 import { DatesRepository } from "../../../../../data/protocols/dates-repository";
+import { Dates } from "../../../../../domain/entities/scheduling";
 import { TypeOrmSchedulingDate } from "../../entity/typeorm-scheduling-date";
 import { AppDataSource } from "../../helper/app-data-source";
+import { Mapper } from "./mapper";
 
 export class TypeOrmDatesRepository implements DatesRepository {
     async add(data: { scheduling_id: number; date: string; }): Promise<string> {
@@ -30,5 +32,24 @@ export class TypeOrmDatesRepository implements DatesRepository {
                 ]
             )
             .execute()
+    }
+
+    async datesOccupiedByExpert(data: { expert_id: number; period: {start: string,end: string}; }): Promise<Dates[]> {
+        const result = await AppDataSource.getInstance()
+            .getRepository(TypeOrmSchedulingDate)
+            .find({
+                select: {
+                    id: true,
+                    date: true
+                },
+                where: {
+                    experts: { id:data.expert_id },
+                    date: Between(data.period.start,data.period.end)
+                }
+            })
+
+        const domainDates = Mapper.toDomainEntities(result)
+
+        return domainDates
     }
 }

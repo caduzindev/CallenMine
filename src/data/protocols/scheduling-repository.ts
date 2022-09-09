@@ -5,4 +5,5 @@ export interface SchedulingRepository {
     get(id: number): Promise<Scheduling|null>
     add(data: {customer_document: string,note: string}): Promise<string>
     getSchedulingsFromExpert(expert_id: number): Promise<Scheduling[]>
+    getSchedulingFromDate(scheduling_date_id: number): Promise<Scheduling|null>
 }

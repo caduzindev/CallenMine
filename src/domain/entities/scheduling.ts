@@ -1,6 +1,7 @@
 import { Customer } from "./customer"
 import { Expert } from "./expert"
 export interface Dates {
+    id: number
     date: string
     experts: Expert[]
 }

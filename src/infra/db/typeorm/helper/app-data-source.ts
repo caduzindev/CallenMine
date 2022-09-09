@@ -1,4 +1,5 @@
 import { DataSource } from "typeorm";
+import { TypeOrmBlock } from "../entity/typeorm-block";
 import { TypeOrmCustomer } from "../entity/typeorm-customer";
 import { TypeOrmExpert } from "../entity/typeorm-expert";
 import { TypeOrmScheduling } from "../entity/typeorm-scheduling";
@@ -16,7 +17,7 @@ export class AppDataSource {
             username: "postgres",
             password: "root",
             database: "teste",
-            entities: [TypeOrmCustomer,TypeOrmExpert,TypeOrmSchedulingDate,TypeOrmScheduling],
+            entities: [TypeOrmCustomer,TypeOrmExpert,TypeOrmSchedulingDate,TypeOrmScheduling,TypeOrmBlock],
             synchronize: false,
             logging: false,
         })
