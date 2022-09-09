@@ -4,6 +4,7 @@ import { TypeOrmExpert } from "../../entity/typeorm-expert";
 export class Mapper {
     public static toDomainEntity(typeOrmExpert: TypeOrmExpert): Expert {
         const domain: Expert = {
+            id: typeOrmExpert.id,
             name: typeOrmExpert.name,
             expertises: typeOrmExpert.expertises
         }

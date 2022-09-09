@@ -20,4 +20,18 @@ export class TypeOrmBlockRepository implements BlockRepository {
 
         return domainBlocks
     }
+
+    async existisBlockInDate(date: string): Promise<Block | null> {
+        let domainBlock: Block | null = null
+
+        const block = await AppDataSource.getInstance()
+            .getRepository(TypeOrmBlock)
+            .query(`select id,start_date,end_date,note from scheduling_block sb where '${date}' between sb.start_date and sb.end_date limit 1;`)
+
+        if (block[0]) {
+            domainBlock = Mapper.toDomainEntity(block[0])
+        }
+
+        return domainBlock
+    }
 }
