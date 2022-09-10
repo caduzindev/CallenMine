@@ -1,5 +1,6 @@
 import { Router } from "express"
 import { adaptRoute } from "../adapters/express-routes-adapter"
+import { allBlockController } from "../factories/all-block-controller"
 import { allExpertFreeController } from "../factories/all-expert-free-controller"
 import { allExpertOccupiedController } from "../factories/all-expert-occupied-controller"
 import { allExpertSchedulesController } from "../factories/all-expert-schedules-controller"
@@ -12,4 +13,5 @@ export default (router: Router): void => {
     router.get('/expert/occupied/:expert_id',adaptRoute(allExpertOccupiedController()))
     router.get('/expert/free',adaptRoute(allExpertFreeController()))
     router.post('/expert/block/scheduling',adaptRoute(createBlockController()))
+    router.get('/expert/block/scheduling',adaptRoute(allBlockController()))
 }

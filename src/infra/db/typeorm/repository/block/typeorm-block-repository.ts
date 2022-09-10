@@ -19,6 +19,17 @@ export class TypeOrmBlockRepository implements BlockRepository {
 
         return result.id
     }
+
+    async getAll(): Promise<Block[]> {
+        const blocks = await AppDataSource.getInstance()
+            .getRepository(TypeOrmBlock)
+            .find()
+
+        const domainBlocks = Mapper.toDomainEntities(blocks)
+
+        return domainBlocks
+    }
+
     async getBlocksPerPeriod(period: { start: string,end: string }): Promise<Block[]> {
         const blocks = await AppDataSource.getInstance()
             .getRepository(TypeOrmBlock)

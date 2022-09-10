@@ -5,4 +5,5 @@ export interface BlockRepository {
     getBlocksPerPeriod(period: { start: string,end:string }): Promise<Block[]>
     existisBlockInDate(date: string): Promise<Block|null>
     add(block: AddBlockDto): Promise<number>
+    getAll(): Promise<Block[]>
 }
