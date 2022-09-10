@@ -1,19 +1,21 @@
 import { AddScheduling } from "../../../domain/usecases/add-scheduling";
 import { Controller } from "../../protocols/controller";
 import { HttpRequest, HttpResponse } from "../../protocols/http";
+import { Validation } from "../../protocols/validation";
 
 export class CreateScheduling implements Controller {
-    constructor (private readonly addScheduling: AddScheduling){}
+    constructor (
+        private readonly addScheduling: AddScheduling,
+        private readonly validation: Validation
+    ){}
 
     async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
         try {
-            const request = httpRequest.body
+            const validate = await this.validation.validate(httpRequest.body)
 
-            if (!request.customer) return {statusCode: 400,data: "customer is required"}
-            if (!request.note) return {statusCode: 400,data: "note is required"}
-            if (!request.schedules) return {statusCode: 400,data: "schedules is required"}
+            if (!validate.valid) return { statusCode: 400, data: { message: validate.message } }
 
-            const schedule_id = await this.addScheduling.add(request)
+            const schedule_id = await this.addScheduling.add(httpRequest.body)
 
             return {
                 statusCode: 200,

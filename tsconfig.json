@@ -8,6 +8,7 @@
         "strictNullChecks": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
+        "strictFunctionTypes": false
     },
     "include": [
         "./src/**/*.ts",
