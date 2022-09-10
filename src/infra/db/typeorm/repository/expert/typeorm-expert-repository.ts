@@ -23,4 +23,18 @@ export class TypeOrmExpertRepository implements ExpertRepository {
         const domainExperts = Mapper.toDomainEntities(experts)
         return domainExperts
     }
+
+    async expertHasScheduleForDate(data: { expert_id: number; date: string; }): Promise<boolean> {
+        const result = await AppDataSource.getInstance()
+            .getRepository(TypeOrmExpert)
+            .findOne({
+                where: {
+                    id: data.expert_id,
+                    dates: { date: data.date }
+                }
+            })
+        if (!result) return false
+
+        return true
+    }
 }
