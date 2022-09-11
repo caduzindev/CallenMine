@@ -1,4 +1,5 @@
 import { DbAddScheduling } from "../../data/scheduling/db-add-scheduling";
+import { TypeOrmCustomerRepository } from "../../infra/db/typeorm/repository/customer/typeorm-customer-repository";
 import { TypeOrmDatesRepository } from "../../infra/db/typeorm/repository/dates/typeorm-dates-repository";
 import { TypeOrmExpertRepository } from "../../infra/db/typeorm/repository/expert/typeorm-expert-repository";
 import { TypeOrmSchedulingRepository } from "../../infra/db/typeorm/repository/scheduling/typeorm-scheduling-repository";
@@ -11,6 +12,7 @@ export const createSchedulingController = (): CreateScheduling => {
     const typeOrmSchedulingRepository = new TypeOrmSchedulingRepository()
     const typeOrmDatesRepository = new TypeOrmDatesRepository()
     const typeOrmExpertRepository = new TypeOrmExpertRepository()
+    const typeOrmCustomerRepository = new TypeOrmCustomerRepository()
     const jsDateUtil = new JsDateUtil()
     const jsDocumentUtil = new JsDocumentUtil()
 
@@ -18,6 +20,7 @@ export const createSchedulingController = (): CreateScheduling => {
         typeOrmSchedulingRepository,
         typeOrmDatesRepository,
         typeOrmExpertRepository,
+        typeOrmCustomerRepository,
         jsDateUtil,
         jsDocumentUtil
     )

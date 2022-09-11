@@ -2,7 +2,7 @@ import { string } from "yup";
 
 export const dateValidSchema = string().test(
     'date',
-    '${path} não é valida',
+    '${path} is not valid',
     (value, _) => {
         const pattern = /\w{3} \d{1,2} \d{4}/i
 
@@ -22,7 +22,7 @@ export const dateValidSchema = string().test(
 
 export const dateValidIsoSchema = string().test(
     'date',
-    '${path} não é valida',
+    '${path} is not valid',
     (value,_) => {
         const pattern = /\d{2}-\d{2}-\d{4}/i
 

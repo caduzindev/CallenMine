@@ -1,4 +1,5 @@
 import { AddScheduling, AddSchedulingDto } from "../../domain/usecases/add-scheduling";
+import { CustomerRepository } from "../protocols/customer-repository";
 import { DateUtil } from "../protocols/date-util";
 import { DatesRepository } from "../protocols/dates-repository";
 import { DocumentUtil } from "../protocols/document-util";
@@ -10,21 +11,25 @@ export class DbAddScheduling implements AddScheduling {
         private readonly schedulingRepository: SchedulingRepository,
         private readonly datesRepository: DatesRepository,
         private readonly expertRepository: ExpertRepository,
+        private readonly customerRepository: CustomerRepository,
         private readonly dateUtil: DateUtil,
-        private readonly documentUitl: DocumentUtil
+        private readonly documentUtil: DocumentUtil
     ) {}
     async add(data: AddSchedulingDto): Promise<number> {
+        const customer = this.documentUtil.removeNonDigitis(data.customer)
         const initialDate = this.dateUtil.converterToIso(data.schedules[0].date)
+
+        if (!await this.customerRepository.get(customer)) throw new Error(`customer ${data.customer} not found`)
 
         if (
             this.dateUtil.differenceBetweenDates(new Date(initialDate), new Date()) > 90
         ) {
-            throw new Error('Primeiro agendamento não pode ser maior que 90 dias')
+            throw new Error('The first appointment cannot be longer than 90 days')
         }
 
         for (const schedulingDate of data.schedules) {
            if (this.dateUtil.differenceBetweenDates(new Date(schedulingDate.date), new Date()) < 0) {
-            throw new Error('Data de agendamento não pode ser menor que a data atual')
+            throw new Error('Scheduling date cannot be less than the current date')
            }
 
            for (const expert of schedulingDate.experts_id) {
@@ -33,12 +38,12 @@ export class DbAddScheduling implements AddScheduling {
                     date: schedulingDate.date
                 })
 
-                if (exists) throw Error(`Já existe agendamento na data ->${schedulingDate.date}<- para o especialista ->${expert}<-`)
+                if (exists) throw Error(`There is already an appointment on the date ->${schedulingDate.date}<- for the specialist ->${expert}<-`)
             }
         }
 
         const schedule_id = await this.schedulingRepository.add({
-            customer_document: this.documentUitl.removeNonDigitis(data.customer),
+            customer_document: customer,
             note: data.note
         })
 

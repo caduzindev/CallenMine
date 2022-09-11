@@ -27,7 +27,7 @@ export class DbGetAllExpertOccupied implements GetAllExpertOccupied {
 
         for (const date of datesExpert) {
             const scheduling = await this.schedulingRepository.getSchedulingFromDate(date.id)
-            if (!scheduling) throw new Error(`Não existe agendamento para a data ${date.date}`)
+            if (!scheduling) throw new Error(`There is no schedule for data ${date.date}`)
             result.push({
                 date: this.dateUtil.converterIsoToBrl(date.date),
                 type: 'scheduling',
