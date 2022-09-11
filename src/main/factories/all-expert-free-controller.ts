@@ -3,7 +3,7 @@ import { TypeOrmBlockRepository } from "../../infra/db/typeorm/repository/block/
 import { TypeOrmExpertRepository } from "../../infra/db/typeorm/repository/expert/typeorm-expert-repository";
 import { JsDateUtil } from "../../infra/utils/js-date-util";
 import { AllExpertFree } from "../../presentation/controllers/expert/all-expert-free";
-import { AllExpertFreeValidation } from "../../presentation/helper/validation/yup/schemas/all-expert-free-validation";
+import { AllExpertFreeValidation } from "../../presentation/helper/validation/yup/all-expert-free-validation";
 
 export const allExpertFreeController = (): AllExpertFree => {
     const typeOrmExpert = new TypeOrmExpertRepository()

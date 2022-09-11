@@ -1,6 +1,6 @@
 import { object } from "yup";
-import { Validation } from "../../../../protocols/validation";
-import { dateValidIsoSchema } from "./date-valid-schema";
+import { Validation } from "../../../protocols/validation";
+import { dateValidIsoSchema } from "./schemas/date-valid-schema";
 
 const allExpertFreeSchema = object().shape({
     date: dateValidIsoSchema

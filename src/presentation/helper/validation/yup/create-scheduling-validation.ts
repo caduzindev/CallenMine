@@ -1,9 +1,10 @@
 import { array, number, object, string } from "yup";
 import { Validation } from "../../../protocols/validation";
 import { dateValidSchema } from "./schemas/date-valid-schema";
+import { cpfOrCnpj } from "./schemas/document-valid-schema";
 
 const createSchedulingSchema = object().shape({
-    customer: string().required(),
+    customer: cpfOrCnpj,
     note: string().required(),
     schedules: array().required().min(1).of(object({
         date: dateValidSchema,
