@@ -29,7 +29,7 @@ export class DbGetAllExpertOccupied implements GetAllExpertOccupied {
             const scheduling = await this.schedulingRepository.getSchedulingFromDate(date.id)
             if (!scheduling) throw new Error(`Não existe agendamento para a data ${date.date}`)
             result.push({
-                date: date.date,
+                date: this.dateUtil.converterIsoToBrl(date.date),
                 type: 'scheduling',
                 message: scheduling.note
             })
@@ -49,7 +49,7 @@ export class DbGetAllExpertOccupied implements GetAllExpertOccupied {
                 const datesArray = this.dateUtil.arrayRangeDates(dateNow,block.end_date)
                 datesArray.forEach(dateString=>{
                     result.push({
-                        date: dateString,
+                        date: this.dateUtil.converterIsoToBrl(dateString),
                         type: 'blocking',
                         message: block.note
                     })
@@ -68,7 +68,7 @@ export class DbGetAllExpertOccupied implements GetAllExpertOccupied {
                 const datesArray = this.dateUtil.arrayRangeDates(block.start_date,date90Days)
                 datesArray.forEach(dateString=>{
                     result.push({
-                        date: dateString,
+                        date: this.dateUtil.converterIsoToBrl(dateString),
                         type: 'blocking',
                         message: block.note
                     })
@@ -81,7 +81,7 @@ export class DbGetAllExpertOccupied implements GetAllExpertOccupied {
 
             datesArray.forEach(dateString=>{
                 result.push({
-                    date: dateString,
+                    date: this.dateUtil.converterIsoToBrl(dateString),
                     type: 'blocking',
                     message: block.note
                 })
