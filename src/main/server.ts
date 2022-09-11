@@ -6,8 +6,14 @@ import { AppDataSource } from '../infra/db/typeorm/helper/app-data-source'
 const app = express()
 app.use(json())
 
+
 routes(app)
 
+app.all('*', function (req,res) {
+    res.status(408).json({
+        message: 'invalid http verb'
+    })
+})
 
 AppDataSource
     .getInstance()
