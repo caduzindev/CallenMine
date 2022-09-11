@@ -19,3 +19,23 @@ export const dateValidSchema = string().test(
         return true;
     }
 )
+
+export const dateValidIsoSchema = string().test(
+    'date',
+    '${path} não é valida',
+    (value,_) => {
+        const pattern = /\d{2}-\d{2}-\d{4}/i
+
+        if (!value?.match(pattern)) return false
+
+        const date = new Date(value);
+
+        const timestamp = date.getTime();
+
+        if (typeof timestamp !== 'number' || Number.isNaN(timestamp)) {
+            return false;
+        }
+
+        return true;
+    }
+)

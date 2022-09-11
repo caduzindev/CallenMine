@@ -5,6 +5,10 @@ export class JsDateUtil implements DateUtil {
         return new Date(date).toISOString().split('T', 1)[0]
     }
 
+    converterBrlToIso(date: string): string {
+        return date.split('-').reverse().join('-')
+    }
+
     differenceBetweenDates(start: Date, end: Date): number {
         const _MS_PER_DAY = 1000 * 60 * 60 * 24
 

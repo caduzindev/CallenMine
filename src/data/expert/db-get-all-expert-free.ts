@@ -11,7 +11,7 @@ export class DbGetAllExpertFree implements GetAllExpertFree {
         private readonly dateUtil: DateUtil
     ) {}
     async getAll(date: string): Promise<boolean | Expert[]> {
-        const dateFormat = this.dateUtil.converterToIso(date)
+        const dateFormat = this.dateUtil.converterBrlToIso(date)
         const existsBlock = await this.blockRepository.existisBlockInDate(dateFormat)
 
         if (existsBlock) return false
