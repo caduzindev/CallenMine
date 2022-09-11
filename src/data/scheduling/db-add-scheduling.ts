@@ -1,6 +1,7 @@
 import { AddScheduling, AddSchedulingDto } from "../../domain/usecases/add-scheduling";
 import { DateUtil } from "../protocols/date-util";
 import { DatesRepository } from "../protocols/dates-repository";
+import { DocumentUtil } from "../protocols/document-util";
 import { ExpertRepository } from "../protocols/expert-repository";
 import { SchedulingRepository } from "../protocols/scheduling-repository";
 
@@ -9,7 +10,8 @@ export class DbAddScheduling implements AddScheduling {
         private readonly schedulingRepository: SchedulingRepository,
         private readonly datesRepository: DatesRepository,
         private readonly expertRepository: ExpertRepository,
-        private readonly dateUtil: DateUtil
+        private readonly dateUtil: DateUtil,
+        private readonly documentUitl: DocumentUtil
     ) {}
     async add(data: AddSchedulingDto): Promise<number> {
         const initialDate = this.dateUtil.converterToIso(data.schedules[0].date)
@@ -35,7 +37,10 @@ export class DbAddScheduling implements AddScheduling {
             }
         }
 
-        const schedule_id = await this.schedulingRepository.add({customer_document: data.customer,note: data.note})
+        const schedule_id = await this.schedulingRepository.add({
+            customer_document: this.documentUitl.removeNonDigitis(data.customer),
+            note: data.note
+        })
 
         for (const schedulingDate of data.schedules) {
             const scheduling_date_id = await this.datesRepository.add({

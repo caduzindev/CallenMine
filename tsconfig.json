@@ -2,13 +2,16 @@
     "compilerOptions": {
         "outDir": "./dist",
         "module":"CommonJS",
-        "target": "ES2019",
+        "target": "ES2021",
         "esModuleInterop": true,
         "allowJs": true,
         "strictNullChecks": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
-        "strictFunctionTypes": false
+        "strictFunctionTypes": false,
+        "lib": [
+            "ES2021.String"
+        ]
     },
     "include": [
         "./src/**/*.ts",
