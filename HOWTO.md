@@ -24,3 +24,20 @@ Rode na raiz do projeto `docker-compose down`
 
 ### **Lembrete**
 Quando você subir o projeto, ja vão ser pre-cadastrados experts e customers no banco inicialmente, você pode usa-los para testar ou então inserir mais... basta acessar o banco(expliquei como anteriormente) e colocar mais customers ou experts
+
+### **Experts já pre-cadastrados no banco**
+```json
+[
+    {"id":1,"name":"Alberto","expertises":["python","BI","matematica"]},
+    {"id":2,"name":"Romerio","expertises":["Redes","Mecanica","linguas"]},
+    {"id":3,"name":"Luiz","expertises":["marketing","SEO"]},
+]
+```
+### **Customers já pre-cadastrados no banco**
+```json
+[
+    {"id":1,"document":"14108865452","name":"Paulo"},
+    {"id":2,"document":"14108865450","name":"Jose"},
+    {"id":3,"document":"14108865480","name":"Carlos"},
+]
+```
