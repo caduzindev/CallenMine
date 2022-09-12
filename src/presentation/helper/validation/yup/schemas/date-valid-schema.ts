@@ -28,14 +28,6 @@ export const dateValidIsoSchema = string().test(
 
         if (!value?.match(pattern)) return false
 
-        const date = new Date(value);
-
-        const timestamp = date.getTime();
-
-        if (typeof timestamp !== 'number' || Number.isNaN(timestamp)) {
-            return false;
-        }
-
         return true;
     }
 )
