@@ -62,7 +62,6 @@ psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-E
     ADD CONSTRAINT scheduling_date_expert_expert_id_fkey
         FOREIGN KEY (expert_id) REFERENCES expert (id);
 
-    use agendamento;
     INSERT INTO customer ("document","name") values ('14108865452','Paulo');
     INSERT INTO customer ("document","name") values ('14108865450','Jose');
     INSERT INTO customer ("document","name") values ('14108865480','Carlos');
