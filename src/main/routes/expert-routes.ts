@@ -8,10 +8,10 @@ import { createBlockController } from "../factories/create-block-controller"
 import { createSchedulingController } from "../factories/create-scheduling-controller"
 
 export default (router: Router): void => {
-    router.post('/expert/scheduling',adaptRoute(createSchedulingController()))
-    router.get('/expert/scheduling/:expert_id',adaptRoute(allExpertSchedulesController()))
-    router.get('/expert/occupied/:expert_id',adaptRoute(allExpertOccupiedController()))
-    router.get('/expert/free',adaptRoute(allExpertFreeController()))
-    router.post('/expert/block/scheduling',adaptRoute(createBlockController()))
-    router.get('/expert/block/scheduling',adaptRoute(allBlockController()))
+    router.post('/expert/scheduling', adaptRoute(createSchedulingController()))
+    router.get('/expert/scheduling/:expert_id', adaptRoute(allExpertSchedulesController()))
+    router.get('/expert/occupied/:expert_id', adaptRoute(allExpertOccupiedController()))
+    router.get('/expert/free', adaptRoute(allExpertFreeController()))
+    router.post('/blocking/scheduling', adaptRoute(createBlockController()))
+    router.get('/blocking/scheduling', adaptRoute(allBlockController()))
 }
